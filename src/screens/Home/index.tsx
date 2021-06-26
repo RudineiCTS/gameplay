@@ -5,9 +5,11 @@ import {Profile} from '../../components/Profile';
 import {ButtonAdd} from '../../components/ButtonAdd';
 import {CategorySelect} from '../../components/CategorySelect';
 import {ListHeader} from '../../components/ListHeader';
-import {styles} from './styles';
 import { Appointment } from '../../components/Appointment';
 import { ListDivider } from '../../components/ListDivider';
+import {Background} from '../../components/Background';
+
+import {styles} from './styles';
 
 export function Home() {
   const [category, setCategory] = useState('');
@@ -44,31 +46,33 @@ export function Home() {
     categoryId === category ? setCategory('') : setCategory(categoryId);
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Profile/>
-        <ButtonAdd/>
+    <Background>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Profile/>
+          <ButtonAdd/>
+        </View>
+          <CategorySelect
+            categorySelected={category}
+            setCategory={handleCategorySelect}
+          />
+          <ListHeader 
+            title="Partidas agendadas"
+            subtitle="Total 6"
+          />
+
+          <FlatList 
+              data={appointment}
+              keyExtractor={item => item.id}
+              renderItem ={({item}) =>(
+                <Appointment data={item}/>
+              )}
+              ItemSeparatorComponent={()=> <ListDivider />}
+              style={styles.matches}
+              showsVerticalScrollIndicator={false}
+
+          />
       </View>
-        <CategorySelect
-          categorySelected={category}
-          setCategory={handleCategorySelect}
-        />
-        <ListHeader 
-          title="Partidas agendadas"
-          subtitle="Total 6"
-        />
-
-        <FlatList 
-            data={appointment}
-            keyExtractor={item => item.id}
-            renderItem ={({item}) =>(
-              <Appointment data={item}/>
-            )}
-            ItemSeparatorComponent={()=> <ListDivider />}
-            style={styles.matches}
-            showsVerticalScrollIndicator={false}
-
-        />
-    </View>
+    </Background>
   )
 }
