@@ -5,24 +5,27 @@ import {Fontisto} from '@expo/vector-icons';
 
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
-import {theme} from '../../global/styles/theme';
-import BannerPNG from '../../assets/banner.png'
-
-import {styles} from './styles';
 import { ListHeader } from '../../components/ListHeader';
+import { Member } from '../../components/Member';
+import { ListDivider } from '../../components/ListDivider';
+
+import BannerPNG from '../../assets/banner.png'
+import {theme} from '../../global/styles/theme';
+import {styles} from './styles';
+import { ButtonIcon } from '../../components/ButtonIcon';
 
 export function AppointmentsDetails() {
   const members =[
     {
       id:'1',
       username:'Rudinei',
-      url:'https://github.com/rudineicts.png',
+      avatar_url:'https://www.github.com/rudineicst.png',
       status:'online',
     },
     {
       id:'2',
       username:'Rudinei',
-      url:'https://github.com/rudineicts.png',
+      avatar_url:'https://www.github.com/rudineicst.png',
       status:'offline',
     }
   ]
@@ -55,8 +58,17 @@ export function AppointmentsDetails() {
         <ListHeader title ={'Jogadores'} subtitle={'total 3'}/>
         <FlatList 
           data={members}
-          
+          keyExtractor={item => item.id}
+          renderItem={({item}) =>(
+            <Member data={item} />
+          )}
+          ItemSeparatorComponent={(item) => <ListDivider/>}
+          style={styles.members}
         />
+
+        <View style={styles.footer}>
+          <ButtonIcon title={'Entrar na partida'}/>
+        </View>
       </Background>
 
   )
