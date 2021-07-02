@@ -61,6 +61,7 @@ export function Home() {
           <ButtonAdd onPress={handleAppointmentCreate}/>
         </View>
           <CategorySelect
+            hasChecked={false}
             categorySelected={category}
             setCategory={handleCategorySelect}
           />

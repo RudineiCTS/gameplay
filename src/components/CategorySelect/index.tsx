@@ -29,7 +29,7 @@ export function CategorySelect({
             key={category.id}
             title={category.title}
             icon={category.icon}
-            hasChecked={false}
+            hasChecked={hasChecked}
             checked={category.id === categorySelected}
             onPress={()=> setCategory(category.id)}
           />

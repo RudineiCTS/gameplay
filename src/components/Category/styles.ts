@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.heading,
     fontSize: 15,
   },
-  check:{
+  hasChecked:{
     position: 'absolute',
     top: 7,
     right: 7,

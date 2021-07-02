@@ -18,7 +18,7 @@ type Props = RectButtonProps & {
 export function Category({
   title,
   icon: Icon,
-  hasChecked = true,
+  hasChecked,
   checked = false,
   ...rest
 }: Props) {
@@ -35,10 +35,10 @@ export function Category({
         >
           
           {
-            hasChecked && 
-            <View style=
-            {checked ? styles.checked : styles.check}
-            />
+              hasChecked && 
+              <View style=
+              {checked ? styles.checked : styles.hasChecked}
+              />
           }
          
           <Icon

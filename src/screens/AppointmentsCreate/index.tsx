@@ -9,6 +9,10 @@ import { Header } from '../../components/Header';
 import { SmallInput } from '../../components/SmallInput';
 import { Button } from '../../components/Button';
 import { TextArea } from '../../components/TextArea';
+import { ModalView } from '../../components/ModalView';
+import { GuildProps } from '../../components/Guild';
+import GuildIcon from '../../components/GuildIcon';
+import {Guilds} from '../Guilds';
 
 
 import {theme} from '../../global/styles/theme';
@@ -17,13 +21,25 @@ import {styles} from './styles';
 
 export function AppointmentsCreate() {
   const [category, setCategory] = useState('');
+  const [openGuildsModal, setOpenGuildsModal] =useState(false);
+  const [guild, setGuild] =useState<GuildProps>({} as GuildProps);
+
+  function handleOpenGuilds(){
+    setOpenGuildsModal(true);
+  }
+
+  function handleGuildSelect(guildSelect: GuildProps){
+    setGuild(guildSelect);
+    setOpenGuildsModal(false)
+
+  }
+
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
     <ScrollView >
-      <Background>
           <Header title={'Agendar Partida'}/>
           <Text style={[
             styles.label,
@@ -33,20 +49,28 @@ export function AppointmentsCreate() {
           </Text>
 
           <CategorySelect 
-            hasChecked
+            hasChecked={true}
             setCategory={setCategory}
             categorySelected={category}
           />
 
           <View style={styles.form}>
-            <RectButton>
+            <RectButton onPress={handleOpenGuilds}>
               <View style={styles.select}>
-
-                <View style={styles.image}/>
+                {
+                  guild.icon 
+                  ? <GuildIcon />
+                  : <View style={styles.image}/>
+                }
+               
 
                 <View style={styles.selectBody}>
                   <Text style={styles.label}>
-                    Selecionar servidor
+                    {
+                    guild.name 
+                    ? guild.name
+                    :'Selecionar servidor'
+                    }
                   </Text>
                 </View>
 
@@ -103,9 +127,14 @@ export function AppointmentsCreate() {
               <Button title='Agendar' />
             </View>
           </View>
-          
-        </Background>
+
       </ScrollView>
+
+
+      <ModalView visible={openGuildsModal}>
+        <Guilds handleGuildSelect={handleGuildSelect}/>
+      </ModalView>
     </KeyboardAvoidingView>
   )
 }
+ 
