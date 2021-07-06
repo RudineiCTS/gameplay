@@ -24,7 +24,8 @@ export const styles = StyleSheet.create({
   subtitle:{
     fontFamily: theme.fonts.text400,
     fontSize:13,
-    color: theme.colors.heading,
+    color: theme.colors.highlight,
+    lineHeight:21,
   },
   members:{
     marginLeft: 24,

@@ -30,7 +30,7 @@ export function Home() {
       description:'É hoje que vamos ao challenger sem perder uma partida da md10'
     },
     {
-      id: '2',
+      id: '5',
       guild:{
         id: '1',
         name:'Lendários',
@@ -80,9 +80,8 @@ export function Home() {
               )}
               ItemSeparatorComponent={()=> <ListDivider />}
               style={styles.matches}
+              contentContainerStyle={{paddingBottom: 69}}
               showsVerticalScrollIndicator={false}
-              
-
           />
       </View>
     </Background>

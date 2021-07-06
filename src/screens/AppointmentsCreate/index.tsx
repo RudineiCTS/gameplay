@@ -27,11 +27,17 @@ export function AppointmentsCreate() {
   function handleOpenGuilds(){
     setOpenGuildsModal(true);
   }
+  function handleCloseGuilds(){
+    setOpenGuildsModal(false);
+  }
 
   function handleGuildSelect(guildSelect: GuildProps){
     setGuild(guildSelect);
     setOpenGuildsModal(false)
 
+  }
+  function handleCategorySelect(categoryId: string){
+    setCategory(categoryId);
   }
 
   return (
@@ -39,6 +45,7 @@ export function AppointmentsCreate() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
+  <Background>
     <ScrollView >
           <Header title={'Agendar Partida'}/>
           <Text style={[
@@ -50,7 +57,7 @@ export function AppointmentsCreate() {
 
           <CategorySelect 
             hasChecked={true}
-            setCategory={setCategory}
+            setCategory={handleCategorySelect}
             categorySelected={category}
           />
 
@@ -88,7 +95,9 @@ export function AppointmentsCreate() {
                 ou seja, uma view vai ficar do lado da outra
               */}
               <View>
-                <Text style={styles.label}> Dia e mês</Text>
+                <Text style={[styles.label, {marginBottom:12}]}>
+                   Dia e mês
+                </Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2}/>
@@ -98,7 +107,9 @@ export function AppointmentsCreate() {
               </View>
 
               <View>
-                <Text style={styles.label}> Hora e minuto</Text>
+                <Text style={[styles.label,{marginBottom:12}]}>
+                   Hora e minuto
+                </Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2}/>
@@ -109,7 +120,7 @@ export function AppointmentsCreate() {
 
             </View>
             
-              <View style={[styles.field,,{marginBottom:12}]}>
+              <View style={[styles.field,{marginBottom:12}]}>
                 <Text style={styles.label}>
                     Descrição
                 </Text>
@@ -129,9 +140,10 @@ export function AppointmentsCreate() {
           </View>
 
       </ScrollView>
+    </Background>
 
 
-      <ModalView visible={openGuildsModal}>
+      <ModalView visible={openGuildsModal} cloneModal={handleCloseGuilds}>
         <Guilds handleGuildSelect={handleGuildSelect}/>
       </ModalView>
     </KeyboardAvoidingView>
